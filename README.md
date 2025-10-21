@@ -1,7 +1,7 @@
 [README.md.md](https://github.com/user-attachments/files/22926384/README.md.md)
 # Sistema de Banco de Dados - Cafeteria
 
-Este repositório contém a estrutura do banco de dados para um sistema de cafeteria.
+Este repositório contém a estrutura inicial do banco de dados para um sistema de cafeteria.
 
 ## Estrutura das Tabelas
 
