@@ -1,32 +1,42 @@
-# Inicializar repositório Git
-git init
+- ---
+-- Modelagem do Banco de Dados para "Café Mania"
+-- ---
 
-# Configurar usuário
-git config user.name "Seu Nome"
-git config user.email "seu.email@exemplo.com"
+-- Tabela 1: Categorias
+-- Armazena os tipos de produtos (ex: Cafés, Doces, Salgados)
+-- ---
+CREATE TABLE categorias (
+  id_categoria INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL
+);
 
-# Criar arquivo SQL
-touch livraria_database.sql
+-- ---
+-- Tabela 2: Produtos
+-- Armazena os produtos vendidos.
+-- Ela se RELACIONA com a tabela 'categorias' através da 'id_categoria_fk'.
+-- ---
+CREATE TABLE produtos (
+  id_produto INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  descricao TEXT,
+  preco DECIMAL(10, 2) NOT NULL,
+  id_categoria_fk INT,
+  FOREIGN KEY (id_categoria_fk) REFERENCES categorias(id_categoria)
+);
 
-# Adicionar script SQL ao arquivo (copiar o conteúdo acima)
+-- ---
+-- Inserindo dados de exemplo (pelo menos 3 em cada)
+-- ---
 
-# Verificar status
-git status
+-- Inserindo 3 categorias
+INSERT INTO categorias (nome) VALUES 
+('Cafés'),
+('Salgados'),
+('Doces');
 
-# Adicionar arquivo ao staging area
-git add livraria_database.sql
-
-# Fazer primeiro commit
-git commit -m "feat: criar estrutura inicial do banco de dados da livraria
-
-- Criar tabelas: produtos, pedidos e itens_pedido
-- Definir chaves primárias e estrangeiras
-- Inserir dados de exemplo
-- Adicionar constraints e tipos de dados apropriados"
-
-# Criar repositório no GitHub e adicionar remote
-git remote add origin https://github.com/seu-usuario/livraria-database.git
-
-# Fazer push para o GitHub
-git branch -M main
-git push -u origin main
+-- Inserindo 3 produtos, relacionando com as categorias acima
+-- (Assumindo que 'Cafés' é id 1, 'Salgados' é id 2, 'Doces' é id 3)
+INSERT INTO produtos (nome, descricao, preco, id_categoria_fk) VALUES 
+('Café com leite', 'Café puro e intenso.', 6.00, 1),
+('Pão de Queijo', 'Tradicional pão de queijo mineiro.', 5.00, 2),
+('Bolo de LEite', 'Fatia de bolo caseiro com erva-doce.', 8.00, 3);
